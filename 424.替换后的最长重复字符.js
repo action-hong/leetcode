@@ -60,7 +60,8 @@ var characterReplacement = function(s, k) {
   let left = 0
   let right = 0
   let ans = 0
-  // 遍历中，区段内最多相同的字母长度
+  // 遍历中，某个区段内最多相同的字母长度
+  // 最大子串长度必然是 = maxCount + k
   let maxCount = 0
   while(right < s.length) {
       const c = s[right]
@@ -77,6 +78,7 @@ var characterReplacement = function(s, k) {
       // 1. 移出的是a，移入的也是a，则maxCount 保持不变
       // 2. 移出的是a, 移入的不是a, （right-left)要更长的话，必然maxCount 也不必缩小
       // 3. 移出的不是a，则起码 maxCount依旧是不会变
+      // 而且 window也在维护，后续 再次有范围中a的范围更大更新maxCount, 已经排除掉了之前左边范围里的a了
 
       while(right - left > maxCount + k) {
           // 不够用啦
