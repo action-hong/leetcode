@@ -72,9 +72,11 @@ var characterReplacement = function(s, k) {
       right++
       maxCount = Math.max(maxCount, window[c])
 
-      // 注意压缩left时，不需要缩小maxCount
-      // 缩小maxCount后，计算出来的 right - left 大小必然比 之前的答案小(未缩小的maxCount + k的更大，right - left更大)
-      // 
+
+      // 左边界向右时，无需更新maxCount，假设最长的字符时a
+      // 1. 移出的是a，移入的也是a，则maxCount 保持不变
+      // 2. 移出的是a, 移入的不是a, （right-left)要更长的话，必然maxCount 也不必缩小
+      // 3. 移出的不是a，则起码 maxCount依旧是不会变
 
       while(right - left > maxCount + k) {
           // 不够用啦
@@ -90,7 +92,7 @@ var characterReplacement = function(s, k) {
 };
 // @lc code=end
 
-const s = 'ABABA'
+const s = 'ABABAA'
 const k = 1
 
 const res = characterReplacement(s, k)
