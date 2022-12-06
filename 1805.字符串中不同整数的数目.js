@@ -75,8 +75,8 @@ var numDifferentIntegers = function (word) {
     return '0' <= ch && '9' >= ch
   }
 
-  while(true) {
-    while(p1 < n && !isDigit(word[p1])) {
+  while (true) {
+    while (p1 < n && !isDigit(word[p1])) {
       p1++
     }
 
@@ -84,55 +84,25 @@ var numDifferentIntegers = function (word) {
 
     p2 = p1
 
-    while(p2 < n && isDigit(word[p2])) {
+    while (p2 < n && isDigit(word[p2])) {
       p2++
     }
 
-    while((p2 - p1) > 1 && word[p1] === '0') 
+    while ((p2 - p1) > 1 && word[p1] === '0')
       // 至少一位，同时确保吧前面多余的0去掉
       p1++
-    }
-
-    set.add(word.slice(p1, p2))
-    p1 = p2
   }
 
-
+  set.add(word.slice(p1, p2))
+  p1 = p2
   return set.size
+}
 
 
 
-  // function trimZero(str) {
-  //   for (let i = 0; i < str.length; i++) {
-  //     if (str[i] !== '0') return str.slice(i)
-  //   }
-  //   return '0'
-  // }
 
-  // let ans = 0
-  // let cur = ''
-  // let map = {}
-  // for (let i = 0; i < word.length; i++) {
-  //   if (/[0-9]/.test(word[i])) {
-  //     cur += `${word[i]}`
-  //   } else if (cur !== '') {
-  //     cur = trimZero(cur)
-  //     if (!map[cur]) {
-  //       map[cur] = true
-  //       ans++
-  //     }
-  //     cur = ''
-  //   }
-  // }
-  // if (cur !== '') {
-  //   cur = trimZero(cur)
-  //   if (!map[cur]) {
-  //     map[cur] = true
-  //     ans++
-  //   }
-  // }
-  // return ans
-};
+
+
 // @lc code=end
 
 // let word = '2393706880236110407059624696967828762752651982730115221690437821508229419410771541532394006597463715513741725852432559057224478815116557380260390432211227579663571046845842281704281749571110076974264971989893607137140456254346955633455446057823738757323149856858154529105301197388177242583658641529908583934918768953462557716z97438020429952944646288084173334701047574188936201324845149110176716130267041674438237608038734431519439828191344238609567530399189316846359766256507371240530620697102864238792350289978450509162697068948604722646739174590530336510475061521094503850598453536706982695212493902968251702853203929616930291257062173c79487281900662343830648295410'
