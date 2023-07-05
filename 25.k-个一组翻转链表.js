@@ -69,62 +69,49 @@
  * @return {ListNode}
  */
 var reverseKGroup = function (head, k) {
-  let res = reverse(head, k)
-  let h = res.head
-  let tail = null
-  while (!res.done) {
-    // 上一个尾部连接
-    if (tail) {
-      tail.next = res.head
+  const dummy = new ListNode(0)
+  dummy.next = head
+
+  let pre = dummy
+  let end = dummy
+
+  while (end.next) {
+    for (let i = 0; i < k; i++) {
+      end = end.next
     }
-    // 更新尾部
-    tail = res.tail
-    // 翻转下一轮
-    res = reverse(res.next, k)
+    if (!end) break
+
+    const start = pre.next
+    // 下一个需要翻转的
+    const next = end.next
+
+    // 断开 前面k个
+    end.next = null
+
+    pre.next = reverse(start)
+    // start 变到尾部了，连接上刚刚尾部的下一个
+    start.next = next
+
+    // 更新 前一个的尾部
+    pre = start
+    end = pre
   }
 
-  if (tail) {
-    tail.next = res.head
-  }
-
-  return h
+  return dummy.next
 };
 
-function reverse(head, k) {
-  // 检查是否够长度
-  let i = 0
-  let node = head
-  while (node && i < k) {
-    i++
-    node = node.next
-  }
-
-  if (i < k) {
-    // 说明不够长度，不用翻转
-    return {
-      head,
-      done: true
-    }
-  }
-
-  // 会翻转，头变成尾
-  let tail = head
+function reverse(head) {
   let prev = null
   let cur = head
-  while (k > 0) {
-    k--
+  while (cur) {
     const next = cur.next
     cur.next = prev
     prev = cur
     cur = next
   }
 
-  return {
-    head: prev,
-    tail: head,
-    next: cur,
-    done: false
-  }
+  return prev
+
 }
 // @lc code=end
 
