@@ -64,6 +64,7 @@
  */
 var levelOrder = function (root) {
   const ans = []
+  if (!root) return ans
 
   const s = [root]
 
