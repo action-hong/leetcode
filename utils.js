@@ -24,8 +24,31 @@ function createList(nums) {
     cur.next = new ListNode(nums[i])
     cur = cur.next
   }
-
   return dummy.next
+}
+
+/**
+ * 
+ * @param {number[]} nums 
+ * @param {number} pos 
+ */
+function createCycleList(nums, pos) {
+  const head = createList(nums)
+  if (pos === -1) return head
+  let cur = head
+  let p
+  let tail
+  while (cur) {
+    if (pos === 0) {
+      p = cur
+    }
+    tail = cur
+    pos--
+    cur = cur.next
+  }
+
+  tail.next = p
+  return head
 }
 
 module.exports = {
