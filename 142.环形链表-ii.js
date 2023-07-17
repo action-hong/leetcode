@@ -86,7 +86,35 @@
  * @return {ListNode}
  */
 var detectCycle = function(head) {
-  //  
+  // 分为 前后两部分 a和b
+  // 两指针一快一慢
+  // slow 走了 s, 则fast 走了2s
+  // 又fast会比slow多走n圈再相遇 即 s + nb = 2s => s = nb
+  // 即相遇时，slow走的路程为 nb
+  // 又已知 走到节点处 需要走 a + nb的长度
+  // 因此相遇后，slow只要在走 a长度即可 (此时可以在开头搞个指针和slow一起走，相遇时，即为交点)
+
+  if (!head) return null
+  let fast = head
+  let slow = head
+  while (true) {
+    if (fast === null || fast.next === null) return null
+    fast = fast.next.next
+    slow = slow.next
+    if (slow === fast) {
+      break
+    }
+  }
+
+  // 第一次相遇
+
+  // 此时slow走了nb，fast走头开始走，走到交点处，fast走了a, slow走了a + nb, 此时正好相遇  
+  fast = head
+  while (fast !== slow) {
+    fast = fast.next
+    slow = slow.next
+  }
+  return fast
 };
 // @lc code=e
 
