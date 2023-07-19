@@ -20,6 +20,14 @@
 var maxPathSum = function(root) {
   let ans = Number.MIN_VALUE
 
+  // 有三种情况：
+  // 1. left + root + right 最大
+  // 2. left + root + root的父节点
+  // 3. right + root + root的父节点
+
+  // 所以在迭代中，我们可以算出第一种情况，尝试更新max
+  // 然后返回值 root + Math.max(left, right) 让父节点去处理更新，对应2,3情况
+
   // 1. 计算该节点左右两边最大值是多少, 合起来加上自身的val，更新答案最大值
   // 2. 返回 左右两边 最大的一边的数值，加上自身val
   function inner (node) {
@@ -41,6 +49,10 @@ var maxPathSum = function(root) {
 };
 // @lc code=end
 
-maxPathSum({
-  val: -3
-})
+const { createTree } = require('./utils')
+
+const tree = createTree([-10,9,20,null,null,15,7])
+
+const val = maxPathSum(tree)
+
+console.log(val);
