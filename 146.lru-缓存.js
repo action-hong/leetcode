@@ -154,7 +154,7 @@ LRUCache.prototype.put = function(key, value) {
 
     if (this.size > this.capacity) {
       this.size--
-      this.removeTail()
+      this.removeTail();
     }
   }
 };
